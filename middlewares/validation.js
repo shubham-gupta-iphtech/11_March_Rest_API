@@ -35,4 +35,5 @@ const validateLogin = [
     }
     ]
 
+
 export {validateLogin, validateSignup};

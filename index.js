@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import dbconnect from "./database/dbconnect.js";
 import router from "./routes/routes.js";
+import taskRoutes from "./routes/taskRoutes.js"
 import cookieParser from "cookie-parser";
 
 
@@ -22,7 +23,7 @@ dbconnect().then(()=>
 
 //middleware
 app.use("/api",router);
-
+app.use("/api",taskRoutes);
 
 
 

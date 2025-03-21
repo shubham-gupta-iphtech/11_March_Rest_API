@@ -20,6 +20,11 @@ const TaskSchema = new mongoose.Schema({
     {
         type: Date,
     },
+    attachment:
+    {
+       type : String,
+       default: "no file attached"
+    },
     createdBy: 
     {
        type: mongoose.Schema.Types.ObjectId,

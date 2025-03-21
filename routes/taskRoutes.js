@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/create", authMiddleware, async (req, res) => {
     
-    const {title, completed, description , dueDate} = req.body;
+    const {title, completed, description , dueDate, attachment} = req.body;
     if(!title) return res.json({message: "title is required"});
  
 
@@ -20,6 +20,7 @@ router.post("/create", authMiddleware, async (req, res) => {
         completed,
         description,
         dueDate,
+        attachment,
         createdBy: req.user.id,
     });
     await newTask.save();
@@ -28,7 +29,12 @@ router.post("/create", authMiddleware, async (req, res) => {
  
  // get all tasks
  
- router.get("/tasks",authMiddleware, async (req, res) => {
+ router.get("/v1/tasks",authMiddleware, async (req, res) => {
+    const tasks = await Task.find({},'-attachment');
+    res.json(tasks);
+ })
+
+ router.get("/v2/tasks",authMiddleware, async (req, res) => {
     const tasks = await Task.find();
     res.json(tasks);
  })
